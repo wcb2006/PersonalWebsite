@@ -1,0 +1,51 @@
+@using PersonalWebsite.Models
+@model ContactMessage
+@{
+    ViewData["Title"] = "Kontakt";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="section-title mb-2">Kontakta mig</h1>
+            <p class="text-muted mb-4">Fyll i formuläret nedan så återkommer jag så snart som möjligt.</p>
+
+            <div class="card p-4">
+                <form asp-action="Index" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label fw-semibold">Namn</label>
+                        <input asp-for="Name" class="form-control" placeholder="Ditt namn" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold">E-post</label>
+                        <input asp-for="Email" class="form-control" placeholder="din@email.com" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Subject" class="form-label fw-semibold">Ämne</label>
+                        <input asp-for="Subject" class="form-control" placeholder="Vad gäller det?" />
+                        <span asp-validation-for="Subject" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Message" class="form-label fw-semibold">Meddelande</label>
+                        <textarea asp-for="Message" class="form-control" rows="5" placeholder="Skriv ditt meddelande här..."></textarea>
+                        <span asp-validation-for="Message" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100">Skicka meddelande</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
