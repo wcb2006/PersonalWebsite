@@ -10,15 +10,72 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PersonalWebsite.styles.css" asp-append-version="true" />
     <style>
+        @@keyframes gradientMove {
+            0%   { background-position: 0% 0%; }
+            25%  { background-position: 100% 0%; }
+            50%  { background-position: 100% 100%; }
+            75%  { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
         body { background-color: #f8f9fa; }
         .navbar-brand { font-weight: 700; font-size: 1.4rem; }
-        .hero-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 80px 0; }
+        .hero-section {
+            background: #1a1a1a;
+            color: white; padding: 80px 0;
+            position: relative;
+            overflow: clip;
+        }
+        .hero-section > * { position: relative; z-index: 1; }
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob-yellow {
+            width: 40%; height: 200%;
+            top: -60%; left: -10%;
+            background: rgba(180, 180, 180, 0.3);
+            animation: blobA 20s ease-in-out infinite alternate;
+        }
+        .blob-blue {
+            width: 60%; height: 250%;
+            top: -80%; left: 15%;
+            background: rgba(100, 100, 100, 0.4);
+            animation: blobB 26s ease-in-out infinite alternate;
+        }
+        .blob-dark {
+            width: 50%; height: 220%;
+            bottom: -80%; right: -10%;
+            background: rgba(0, 0, 0, 0.5);
+            animation: blobC 18s ease-in-out infinite alternate;
+        }
+        @@keyframes blobA {
+            0%   { transform: translate(0%, 0%) scale(1); }
+            50%  { transform: translate(30%, 10%) scale(1.15); }
+            100% { transform: translate(10%, -15%) scale(0.9); }
+        }
+        @@keyframes blobB {
+            0%   { transform: translate(0%, 0%) scale(1); }
+            40%  { transform: translate(-15%, 12%) scale(1.2); }
+            100% { transform: translate(-8%, -10%) scale(0.92); }
+        }
+        @@keyframes blobC {
+            0%   { transform: translate(0%, 0%) scale(1); }
+            60%  { transform: translate(20%, -20%) scale(1.1); }
+            100% { transform: translate(-25%, 10%) scale(1.18); }
+        }
         .card { border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 12px; transition: transform 0.2s; }
         .card:hover { transform: translateY(-3px); }
-        .section-title { font-weight: 700; color: #1a1a2e; border-left: 4px solid #0f3460; padding-left: 12px; }
-        .timeline-item { border-left: 3px solid #0f3460; padding-left: 20px; margin-bottom: 30px; }
-        .timeline-dot { width: 12px; height: 12px; background: #0f3460; border-radius: 50%; margin-left: -26px; margin-top: 6px; float: left; }
-        footer { background-color: #1a1a2e; color: #aaa; padding: 20px 0; margin-top: 60px; }
+        .section-title { font-weight: 700; color: #333; border-left: 4px solid #666; padding-left: 12px; }
+        .timeline-item { border-left: 3px solid #444; padding-left: 20px; margin-bottom: 30px; }
+        .timeline-dot { width: 12px; height: 12px; background: #444; border-radius: 50%; margin-left: -26px; margin-top: 6px; float: left; }
+        .animated-bg {
+            background: #1a1a1a;
+        }
+        footer { background: #1a1a1a; color: #aaa; padding: 20px 0; margin-top: 60px; }
         footer a { color: #ccc; }
 
         /* Navbar hide/show on scroll */
@@ -35,7 +92,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #1a1a2e;">
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: white;">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">Wille</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -55,6 +112,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Contact" asp-action="Index">Kontakt</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Education" asp-action="Index">Utbildning</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +125,7 @@
         @RenderBody()
     </main>
 
-    <footer>
+    <footer class="animated-bg">
         <div class="container text-center">
             <p class="mb-0">&copy; @DateTime.Now.Year Wille. Byggd med ASP.NET Core &amp; PostgreSQL.</p>
         </div>

@@ -18,8 +18,12 @@ Desktop.ini
 .DS_Store
 
 ## Secrets
+appsettings.json
 appsettings.Development.json
 appsettings.Production.json
+
+## Claude Code
+.claude/settings.local.json
 
 ## Misc
 *.log
