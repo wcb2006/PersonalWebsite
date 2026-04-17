@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Project> Projects { get; set; }
     public DbSet<Experience> Experiences { get; set; }
     public DbSet<Education> Educations { get; set; }
+    public DbSet<Course> Courses { get; set; }
     public DbSet<ContactMessage> ContactMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -95,6 +96,18 @@ public class AppDbContext : DbContext
                 StartDate = new DateTime(2020, 8, 1, 0, 0, 0, DateTimeKind.Utc),
                 EndDate = new DateTime(2021, 3, 31, 0, 0, 0, DateTimeKind.Utc),
                 Description = "Administrerade inkommande samtal och dirigerade dem effektivt. Mottog och välkomnade besökare för att skapa ett trevligt intryck."
+            }
+        );
+
+        modelBuilder.Entity<Course>().HasData(
+            new Course
+            {
+                Id = 1,
+                Name = "Programmering med C#/.NET, grund",
+                Description = "Syntax för C#. Hur C# och .NET kan användas för att lösa olika typer av uppgifter. Versionshantering.",
+                Grade = "VG",
+                StartDate = new DateTime(2025, 8, 18, 0, 0, 0, DateTimeKind.Utc),
+                EducationId = 1
             }
         );
 

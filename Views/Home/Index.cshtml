@@ -23,7 +23,7 @@
     }
     .project-card-inner img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s; }
     .project-card-inner:hover img { transform: scale(1.04); }
-    .project-no-image { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; background: linear-gradient(135deg,#1a1a2e,#0f3460); }
+    .project-no-image { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; background: linear-gradient(135deg, #1a1a1a, #333); }
     .project-overlay {
         position:absolute; bottom:0; left:0; right:0;
         background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
@@ -67,6 +67,9 @@
 
 <!-- Hero -->
 <div class="hero-section">
+    <div class="hero-blob blob-yellow"></div>
+    <div class="hero-blob blob-blue"></div>
+    <div class="hero-blob blob-dark"></div>
     <div class="container text-center">
         @if (!string.IsNullOrEmpty(about?.ProfileImageUrl))
         {
