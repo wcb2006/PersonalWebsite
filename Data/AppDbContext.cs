@@ -108,8 +108,28 @@ public class AppDbContext : DbContext
                 Grade = "VG",
                 StartDate = new DateTime(2025, 8, 18, 0, 0, 0, DateTimeKind.Utc),
                 EducationId = 1
+            },
+            new Course
+            {
+                Id = 2,
+                Name = "Självledarskap - att leda sig själv, grund",
+                Description = "Utveckla färdigheter för att motivera sig själv samt attityder som leder till maximal utveckling under studietiden och i arbetslivet. Fokus på ökad anställningsbarhet.",
+                Grade = "VG",
+                StartDate = new DateTime(2025, 8, 11, 0, 0, 0, DateTimeKind.Utc),
+                EducationId = 1
+            },
+            new Course
+            {
+                Id = 3,
+                Name = "Databasteknik",
+                Description = "Modellering, lagring och hämtning av data i databaser. SQL, databasdesign och jämförelse av olika databassystem.",
+                Grade = "VG",
+                StartDate = new DateTime(2025, 10, 20, 0, 0, 0, DateTimeKind.Utc),
+                EducationId = 1
             }
         );
+
+
 
         modelBuilder.Entity<Education>().HasData(
             new Education
