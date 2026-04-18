@@ -126,6 +126,15 @@ public class AppDbContext : DbContext
                 Grade = "VG",
                 StartDate = new DateTime(2025, 10, 20, 0, 0, 0, DateTimeKind.Utc),
                 EducationId = 1
+            },
+            new Course
+            {
+                Id = 4,
+                Name = "Testning",
+                Description = "Planering, genomförande och uppföljning av tester. Testdriven utveckling (TDD) och olika testmetoder.",
+                Grade = "VG",
+                StartDate = new DateTime(2025, 11, 24, 0, 0, 0, DateTimeKind.Utc),
+                EducationId = 1
             }
         );
 
