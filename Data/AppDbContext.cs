@@ -22,11 +22,8 @@ public class AppDbContext : DbContext
         {
             Id = 1,
             Name = "William Borg",
-            Title = "Systemutvecklare",
-            Bio = "Driven och mångsidig professionell med erfarenhet inom kundservice och försäljning. " +
-                  "Starka färdigheter i kassahantering och teamarbete, med en bakgrund som receptionist " +
-                  "och butiksäljare. Utrustad med en utbildning inom systemutveckling och medieteknik, är " +
-                  "jag engagerad i att skapa positiva kundupplevelser och effektivt hantera administrativa uppgifter.",
+            Title = "Systemutvecklarstuderande | Säkerhet & IT",
+            Bio = "Studerande inom systemutveckling med inriktning säkerhet vid JENSEN yrkeshögskola. Arbetar med C#/.NET, SQL och testdriven utveckling, med ett stort intresse för att bygga säkra och hållbara system. Har även erfarenhet från serviceyrken som gett starka färdigheter i teamarbete, kommunikation och att snabbt sätta mig in i nya uppgifter. Drivs av att skapa lösningar som förenklar vardagen och skapar verkligt värde genom teknik.",
             GithubUrl = "https://github.com/wcb2006",
             LinkedInUrl = "https://www.linkedin.com/in/williamcborg/"
         });
