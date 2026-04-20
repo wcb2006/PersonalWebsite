@@ -103,8 +103,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Om mig</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Projects" asp-action="Index">Projekt</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" asp-controller="Projects" asp-action="Index">Projekt</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Projects" asp-action="Index" asp-route-category="school">Skolprojekt</a></li>
+                                <li><a class="dropdown-item" asp-controller="Projects" asp-action="Index" asp-route-category="personal">Mina projekt</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Cv" asp-action="Index">CV</a>

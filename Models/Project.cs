@@ -9,4 +9,5 @@ public class Project
     public string? ProjectUrl { get; set; }
     public string? Technologies { get; set; }
     public int Year { get; set; }
+    public string? Category { get; set; }
 }

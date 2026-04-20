@@ -36,7 +36,8 @@ public class AppDbContext : DbContext
                 Title = "Personlig hemsida",
                 Description = "En personlig hemsida byggd med ASP.NET Core MVC och PostgreSQL.",
                 Technologies = "C#, ASP.NET Core, PostgreSQL, Bootstrap",
-                Year = 2026
+                Year = 2026,
+                Category = "personal"
             }
         );
 
@@ -133,10 +134,17 @@ public class AppDbContext : DbContext
                 Grade = "VG",
                 StartDate = new DateTime(2025, 11, 24, 0, 0, 0, DateTimeKind.Utc),
                 EducationId = 1
+            },
+            new Course
+            {
+                Id = 5,
+                Name = "Agil systemutveckling och ämnesövergripande projekt",
+                Description = "Agila metoder, kravhantering, DevOps och projektplanering. Genomförande av ämnesövergripande IT-projekt med fokus på samarbete och agil arbetsmetodik.",
+                Grade = "VG",
+                StartDate = new DateTime(2026, 1, 5, 0, 0, 0, DateTimeKind.Utc),
+                EducationId = 1
             }
         );
-
-
 
         modelBuilder.Entity<Education>().HasData(
             new Education

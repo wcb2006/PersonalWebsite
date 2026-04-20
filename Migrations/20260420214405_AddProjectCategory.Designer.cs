@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalWebsite.Data;
@@ -11,9 +12,11 @@ using PersonalWebsite.Data;
 namespace PersonalWebsite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260420214405_AddProjectCategory")]
+    partial class AddProjectCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,15 +171,6 @@ namespace PersonalWebsite.Migrations
                             Grade = "VG",
                             Name = "Testning",
                             StartDate = new DateTime(2025, 11, 24, 0, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Agila metoder, kravhantering, DevOps och projektplanering. Genomförande av ämnesövergripande IT-projekt med fokus på samarbete och agil arbetsmetodik.",
-                            EducationId = 1,
-                            Grade = "VG",
-                            Name = "Agil systemutveckling och ämnesövergripande projekt",
-                            StartDate = new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
