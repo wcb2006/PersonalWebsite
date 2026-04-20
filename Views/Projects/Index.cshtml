@@ -1,11 +1,18 @@
 @using PersonalWebsite.Models
 @model List<Project>
 @{
-    ViewData["Title"] = "Projekt";
+    var category = ViewData["Category"] as string;
+    var heading = category switch
+    {
+        "school" => "Skolprojekt",
+        "personal" => "Mina projekt",
+        _ => "Alla projekt"
+    };
+    ViewData["Title"] = heading;
 }
 
 <div class="container py-5">
-    <h1 class="section-title mb-5">Mina Projekt</h1>
+    <h1 class="section-title mb-5">@heading</h1>
 
     @if (!Model.Any())
     {

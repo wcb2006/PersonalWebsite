@@ -13,9 +13,18 @@ public class ProjectsController : Controller
         _db = db;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? category)
     {
-        var projects = await _db.Projects.OrderByDescending(p => p.Year).ToListAsync();
+        var query = _db.Projects.AsQueryable();
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            query = query.Where(p => p.Category == category);
+        }
+
+        var projects = await query.OrderByDescending(p => p.Year).ToListAsync();
+
+        ViewData["Category"] = category;
         return View(projects);
     }
 }
