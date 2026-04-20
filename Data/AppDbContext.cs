@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<Education> Educations { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<ContactMessage> ContactMessages { get; set; }
+    public DbSet<ITExperience> ItExperience { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -157,5 +158,13 @@ public class AppDbContext : DbContext
                 Description = null
             }
         );
+        modelBuilder.Entity<ITExperience>().HasData(
+        new ITExperience { Id = 1, Name = "C#" },
+        new ITExperience { Id = 2, Name = ".NET" },
+        new ITExperience { Id = 3, Name = "SQL" },
+        new ITExperience { Id = 4, Name = "Git" },
+        new ITExperience { Id = 5, Name = "API-utveckling" }
+        );
+
     }
 }
