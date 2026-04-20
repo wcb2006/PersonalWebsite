@@ -19,7 +19,8 @@ public class CvController : Controller
         var vm = new CvViewModel
         {
             Experiences = await _db.Experiences.OrderByDescending(e => e.StartDate).ToListAsync(),
-            Educations = await _db.Educations.OrderByDescending(e => e.StartYear).ToListAsync()
+            Educations = await _db.Educations.OrderByDescending(e => e.StartYear).ToListAsync(),
+            ItExperience = await _db.ItExperience.ToListAsync()
         };
         return View(vm);
     }

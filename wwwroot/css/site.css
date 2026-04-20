@@ -65,3 +65,21 @@ body {
 .form-floating>.form-control:focus::placeholder {
     text-align: start;
 }
+
+.it-skill-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.it-skill-badge:hover {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
