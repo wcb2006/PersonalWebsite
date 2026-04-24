@@ -71,18 +71,8 @@
     <div class="hero-blob blob-blue"></div>
     <div class="hero-blob blob-dark"></div>
     <div class="container text-center">
-        @if (!string.IsNullOrEmpty(about?.ProfileImageUrl))
-        {
-            <img src="@about.ProfileImageUrl" alt="Profilbild" class="rounded-circle mb-4"
-                 style="width:140px;height:140px;object-fit:cover;border:4px solid white;" />
-        }
-        else
-        {
-            <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center mb-4"
-                 style="width:140px;height:140px;font-size:3rem;color:white;">
-                @(about?.Name.FirstOrDefault())
-            </div>
-        }
+        <img src="~/images/F99E2423-08A9-4801-92AF-629B29F5A6B5.jpg" alt="Profilbild" class="rounded-circle mb-4"
+             style="width:100px;height:100px;object-fit:cover;object-position:center 10%;transform:scale(1.5);border:3px solid white;" />
         <h1 class="display-4 fw-bold">@about?.Name</h1>
         <p class="lead text-white-50">@about?.Title</p>
         <div class="mt-3">
@@ -166,7 +156,7 @@
                                 }
                                 else
                                 {
-                                    <div class="project-no-image">💻</div>
+                                    <div class="project-no-image"><i class="bi bi-code-slash"></i></div>
                                 }
                                 <span class="year-badge">@project.Year</span>
                                 <div class="project-overlay">
@@ -194,7 +184,7 @@
                                 }
                                 else
                                 {
-                                    <div class="project-no-image">💻</div>
+                                    <div class="project-no-image"><i class="bi bi-code-slash"></i></div>
                                 }
                                 <span class="year-badge">@project.Year</span>
                                 <div class="project-overlay">
@@ -235,7 +225,7 @@
                 <div class="col-md-4">
                     <a asp-controller="Projects" asp-action="Index" class="text-decoration-none">
                         <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2">💻</div>
+                            <div class="fs-1 mb-2"><i class="bi bi-code-slash"></i></div>
                             <h5>Alla projekt</h5>
                             <p class="text-muted small">Se alla mina projekt</p>
                         </div>
@@ -244,7 +234,7 @@
                 <div class="col-md-4">
                     <a asp-controller="Cv" asp-action="Index" class="text-decoration-none">
                         <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2">📄</div>
+                            <div class="fs-1 mb-2"><i class="bi bi-file-earmark-text"></i></div>
                             <h5>CV</h5>
                             <p class="text-muted small">Erfarenheter och utbildning</p>
                         </div>
@@ -253,7 +243,7 @@
                 <div class="col-md-4">
                     <a asp-controller="Contact" asp-action="Index" class="text-decoration-none">
                         <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2">✉️</div>
+                            <div class="fs-1 mb-2"><i class="bi bi-envelope"></i></div>
                             <h5>Kontakt</h5>
                             <p class="text-muted small">Skicka ett meddelande</p>
                         </div>
