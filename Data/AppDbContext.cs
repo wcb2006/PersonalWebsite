@@ -38,6 +38,17 @@ public class AppDbContext : DbContext
                 Technologies = "C#, ASP.NET Core, PostgreSQL, Bootstrap",
                 Year = 2026,
                 Category = "personal"
+            },
+            new Project
+            {
+                Id = 2,
+                Title = "Fitness App",
+                Description = "En webbaserad tränings- och kostapp där man bygger egna träningsprogram, loggar set, reps och vikter samt följer sin viktutveckling över tid.",
+                ImageUrl = "/images/FitnessAppProject.png",
+                ProjectUrl = "https://pullpush.jborg.se/",
+                Technologies = "C#, ASP.NET Core, PostgreSQL, JavaScript",
+                Year = 2026,
+                Category = "personal"
             }
         );
 
