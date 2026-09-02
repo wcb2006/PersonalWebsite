@@ -35,6 +35,7 @@ public class AppDbContext : DbContext
                 Id = 1,
                 Title = "Personlig hemsida",
                 Description = "En personlig hemsida byggd med ASP.NET Core MVC och PostgreSQL.",
+                ProjectUrl = "https://github.com/wcb2006/PersonalWebsite",
                 Technologies = "C#, ASP.NET Core, PostgreSQL, Bootstrap",
                 Year = 2026,
                 Category = "personal"
@@ -49,6 +50,11 @@ public class AppDbContext : DbContext
                 Technologies = "C#, ASP.NET Core, PostgreSQL, JavaScript",
                 Year = 2026,
                 Category = "personal"
+            },
+            new Project
+            {
+                Id = 3,
+                Title =
             }
         );
 
