@@ -54,7 +54,12 @@ public class AppDbContext : DbContext
             new Project
             {
                 Id = 3,
-                Title =
+                Title = "Spel Hyllan",
+                Description = "En webbaserad applikation där man kan lägga till, redigera och ta bort spel i sin samling. Användare kan även betygsätta spelen",
+                ProjectUrl = "https://spelhyllan-production.up.railway.app",
+                Year = 2026,
+                Technologies = "C#, ASP.NET Core, PostgreSQL, JavaScript",
+                Category = "personal"
             }
         );
 
@@ -103,15 +108,6 @@ public class AppDbContext : DbContext
                 StartDate = new DateTime(2023, 7, 1, 0, 0, 0, DateTimeKind.Utc),
                 EndDate = new DateTime(2023, 8, 31, 0, 0, 0, DateTimeKind.Utc),
                 Description = "Effektivt utförande av tilldelade uppgifter. Samordnade arbetslag."
-            },
-            new Experience
-            {
-                Id = 6,
-                Company = "Pranari, Malmö",
-                Role = "Receptionist",
-                StartDate = new DateTime(2020, 8, 1, 0, 0, 0, DateTimeKind.Utc),
-                EndDate = new DateTime(2021, 3, 31, 0, 0, 0, DateTimeKind.Utc),
-                Description = "Administrerade inkommande samtal och dirigerade dem effektivt. Mottog och välkomnade besökare för att skapa ett trevligt intryck."
             }
         );
 
