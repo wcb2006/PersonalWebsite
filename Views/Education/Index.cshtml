@@ -4,53 +4,63 @@
     ViewData["Title"] = "Utbildning";
 }
 
-<div class="container py-5">
-    <h1 class="section-title mb-5">Utbildning</h1>
+<section class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow">Studier</p>
+            <h2 class="section-title">Utbildning</h2>
+            <p class="section-lead">Program, kurser och betyg — uppdaterat löpande.</p>
+        </div>
 
-    @foreach (var edu in Model)
-    {
-        <div class="timeline-item">
-            <div class="d-flex align-items-center mb-1">
-                <div class="timeline-dot"></div>
-                <h5 class="mb-0 ms-2">@edu.Degree</h5>
+        @if (!Model.Any())
+        {
+            <div class="card" style="text-align:center;padding:56px 24px">
+                <p class="card-text">Inga utbildningar tillagda ännu.</p>
             </div>
-            <p class="text-primary fw-semibold mb-1">@edu.School</p>
-            <p class="text-muted small mb-2">
-                @edu.StartYear – @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : "Pågående")
-            </p>
-            @if (!string.IsNullOrEmpty(edu.Description))
-            {
-                <p class="text-muted">@edu.Description</p>
-            }
+        }
 
-            @if (edu.Courses.Any())
-            {
-                <h6 class="mt-3 mb-2 fw-bold">Kurser</h6>
-                <div class="row g-3">
-                    @foreach (var course in edu.Courses.OrderBy(c => c.StartDate))
+        @foreach (var edu in Model)
+        {
+            <article class="reveal" style="margin-bottom:64px">
+                <div class="card" style="margin-bottom:24px">
+                    <p class="timeline-meta">
+                        @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : "Pågående")
+                    </p>
+                    <h3 class="timeline-role" style="font-size:1.4rem">@edu.Degree</h3>
+                    <p class="timeline-org">@edu.School</p>
+                    @if (!string.IsNullOrEmpty(edu.Description))
                     {
-                        <div class="col-md-6">
-                            <div class="card p-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <h6 class="mb-1 fw-semibold">@course.Name</h6>
+                        <p class="timeline-desc" style="margin-top:8px">@edu.Description</p>
+                    }
+                </div>
+
+                @if (edu.Courses.Any())
+                {
+                    <p class="card-label" style="padding-left:2px">Kurser · @edu.Courses.Count</p>
+                    <div class="grid-2">
+                        @foreach (var course in edu.Courses.OrderBy(c => c.StartDate))
+                        {
+                            <div class="card card--hover" style="padding:20px">
+                                <div class="project-head" style="margin-bottom:8px">
+                                    <h4 class="card-title" style="font-size:.98rem">@course.Name</h4>
                                     @if (!string.IsNullOrEmpty(course.Grade))
                                     {
-                                        <span class="badge bg-dark ms-2">@course.Grade</span>
+                                        <span class="tag tag--solid">@course.Grade</span>
                                     }
                                 </div>
                                 @if (course.StartDate.HasValue)
                                 {
-                                    <p class="text-muted small mb-1">@course.StartDate.Value.ToString("yyyy-MM-dd")</p>
+                                    <p class="card-text dim" style="font-size:.8rem">@course.StartDate.Value.ToString("yyyy-MM-dd")</p>
                                 }
                                 @if (!string.IsNullOrEmpty(course.Description))
                                 {
-                                    <p class="text-muted small mb-0">@course.Description</p>
+                                    <p class="card-text" style="margin-top:8px">@course.Description</p>
                                 }
                             </div>
-                        </div>
-                    }
-                </div>
-            }
-        </div>
-    }
-</div>
+                        }
+                    </div>
+                }
+            </article>
+        }
+    </div>
+</section>

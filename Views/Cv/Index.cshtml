@@ -4,120 +4,125 @@
     ViewData["Title"] = "CV";
 }
 
-<div class="container py-5">
-    <div class="d-flex align-items-center justify-content-between mb-5 flex-wrap gap-3">
-        <h1 class="section-title mb-0">CV – William Borg</h1>
-        <div>
-            <a href="/cv-william-borg.pdf" target="_blank" class="btn btn-outline-dark me-2">Visa CV</a>
-            <a href="/cv-william-borg.pdf" download="CV William Borg.pdf" class="btn btn-dark">Ladda ner CV</a>
-        </div>
-    </div>
-
-    <div class="row g-5">
-        <!-- Erfarenhet -->
-        <div class="col-lg-8">
-            <h2 class="section-title mb-4">Arbetslivserfarenhet</h2>
-            @foreach (var exp in Model.Experiences)
-            {
-                <div class="timeline-item">
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="timeline-dot"></div>
-                        <h5 class="mb-0 ms-2">@exp.Role</h5>
-                    </div>
-                    <p class="text-primary fw-semibold mb-1">@exp.Company</p>
-                    <p class="text-muted small mb-2">
-                        @exp.StartDate.ToString("MMM yyyy") –
-                        @(exp.EndDate.HasValue? exp.EndDate.Value.ToString("MMM yyyy") : "Aktuell")
-                    </p>
-                    @if (!string.IsNullOrEmpty(exp.Description))
-                    {
-                        <p class="mb-0 text-muted">@exp.Description</p>
-                    }
-                </div>
-            }
-
-            <h2 class="section-title mt-5 mb-4">Utbildning</h2>
-            @foreach (var edu in Model.Educations)
-            {
-                <div class="timeline-item">
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="timeline-dot"></div>
-                        <h5 class="mb-0 ms-2">@edu.Degree</h5>
-                    </div>
-                    <p class="text-primary fw-semibold mb-1">@edu.School</p>
-                    <p class="text-muted small mb-0">
-                        @edu.StartYear – @(edu.EndYear.HasValue? edu.EndYear.Value.ToString() : "Aktuell")
-                    </p>
-                </div>
-            }
+<section class="section">
+    <div class="container">
+        <div class="section-head flex-between reveal">
+            <div>
+                <p class="eyebrow">Meritförteckning</p>
+                <h2 class="section-title" style="margin-bottom:0">CV — William Borg</h2>
+            </div>
+            <div class="footer-links">
+                <a class="btn-ghost btn-sm" href="/cv-william-borg.pdf" target="_blank" rel="noopener">
+                    <i class="bi bi-file-earmark-pdf"></i> Visa PDF
+                </a>
+                <a class="btn-solid btn-sm" href="/cv-william-borg.pdf" download="CV William Borg.pdf">
+                    <i class="bi bi-download"></i> Ladda ner
+                </a>
+            </div>
         </div>
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Färdigheter -->
-            <div class="card p-4 mb-4">
-                <h5 class="fw-bold mb-3" style="color:#333;">Färdigheter</h5>
-                @foreach (var skill in new[] { "Teamarbete", "Utbildning av kollegor", "Kassahantering",
-              "Kommunikation", "Datahantering", "Kundservice" })
+        <div class="split">
+            <!-- Huvudspalt -->
+            <div>
+                @if (Model.Experiences.Any())
                 {
-                    <div class="d-flex align-items-center mb-2">
-                        <div style="width:8px;height:8px;border-radius:50%;background:#444;flex-shrink:0;"></div>
-                        <span class="ms-2">@skill</span>
+                    <p class="card-label reveal">Arbetslivserfarenhet</p>
+                    <div class="timeline reveal" style="margin-bottom:56px">
+                        @foreach (var exp in Model.Experiences)
+                        {
+                            <div class="timeline-item">
+                                <p class="timeline-meta">
+                                    @exp.StartDate.ToString("MMM yyyy") &ndash;
+                                    @(exp.EndDate.HasValue ? exp.EndDate.Value.ToString("MMM yyyy") : "Nu")
+                                </p>
+                                <h3 class="timeline-role">@exp.Role</h3>
+                                <p class="timeline-org">@exp.Company</p>
+                                @if (!string.IsNullOrEmpty(exp.Description))
+                                {
+                                    <p class="timeline-desc">@exp.Description</p>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (Model.Educations.Any())
+                {
+                    <p class="card-label reveal">Utbildning</p>
+                    <div class="timeline reveal">
+                        @foreach (var edu in Model.Educations)
+                        {
+                            <div class="timeline-item">
+                                <p class="timeline-meta">
+                                    @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : "Nu")
+                                </p>
+                                <h3 class="timeline-role">@edu.Degree</h3>
+                                <p class="timeline-org">@edu.School</p>
+                                @if (!string.IsNullOrEmpty(edu.Description))
+                                {
+                                    <p class="timeline-desc">@edu.Description</p>
+                                }
+                            </div>
+                        }
                     </div>
                 }
             </div>
 
-            <!-- IT-färdigheter -->
-            <div class="card p-4 mb-4">
-                <h5 class="fw-bold mb-3" style="color:#333;">IT-färdigheter</h5>
-                <div class="d-flex flex-wrap gap-2">
-                    @foreach (var it in Model.ItExperience)
-                    {
-                        <span class="it-skill-badge">@it.Name</span>
-                    }
+            <!-- Sidospalt -->
+            <aside class="stack">
+                <div class="card reveal">
+                    <p class="card-label">Färdigheter</p>
+                    <ul class="bullet-list">
+                        @foreach (var skill in new[] { "Teamarbete", "Utbildning av kollegor", "Kassahantering",
+                                                       "Kommunikation", "Datahantering", "Kundservice" })
+                        {
+                            <li>@skill</li>
+                        }
+                    </ul>
                 </div>
-            </div>
 
-            <!-- Certifikat -->
-            <div class="card p-4 mb-4">
-                <h5 class="fw-bold mb-3" style="color:#333;">Certifikat</h5>
-                <a href="https://www.credly.com/badges/f300179c-6abc-4094-ac81-fde7b32277e8" target="_blank"
-                       class="text-decoration-none">
-                    <img src="/images/python-cert.jpg" alt="Python Certiport Certificate" class="img-fluid rounded mb-3"
-                         style="width:100%;" />
-                    <p class="mb-1 fw-semibold text-dark">Python – Certiport</p>
-                    <p class="text-muted small mb-0">Pearson VUE Business</p>
-                    <p class="text-primary small mt-1">Visa certifikat →</p>
+                @if (Model.ItExperience.Any())
+                {
+                    <div class="card reveal">
+                        <p class="card-label">IT-färdigheter</p>
+                        <div class="tag-row">
+                            @foreach (var it in Model.ItExperience)
+                            {
+                                <span class="tag">@it.Name</span>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <a class="card card--hover reveal" style="display:block"
+                   href="https://www.credly.com/badges/f300179c-6abc-4094-ac81-fde7b32277e8"
+                   target="_blank" rel="noopener">
+                    <p class="card-label">Certifikat</p>
+                    <img src="~/images/python-cert.jpg" alt="Python-certifikat från Certiport"
+                         style="width:100%;border-radius:10px;border:1px solid var(--border);margin-bottom:16px" />
+                    <h3 class="card-title">Python — Certiport</h3>
+                    <p class="card-text">Pearson VUE Business</p>
+                    <p class="card-text dim" style="margin-top:10px">Visa certifikat <span class="btn-arrow">&rarr;</span></p>
                 </a>
-            </div>
 
-            <!-- Språk -->
-            <div class="card p-4 mb-4">
-                <h5 class="fw-bold mb-3" style="color:#333;">Språk</h5>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Svenska</span>
-                    <span class="badge bg-dark">Inhemsk</span>
+                <div class="card reveal">
+                    <p class="card-label">Språk</p>
+                    <ul class="info-list">
+                        <li><span class="info-key">Svenska</span><span class="info-val">Modersmål</span></li>
+                        <li><span class="info-key">Engelska</span><span class="info-val">Avancerad</span></li>
+                    </ul>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <span>Engelska</span>
-                    <span class="badge bg-secondary">Avancerad</span>
-                </div>
-            </div>
 
-            <!-- Kontakt -->
-            <div class="card p-4">
-                <h5 class="fw-bold mb-3" style="color:#333;">Kontakt</h5>
-                <p class="mb-2 small"><strong>Tel:</strong> 070-582 82 22</p>
-                <p class="mb-2 small"><strong>E-post:</strong> wille.borg.c@gmail.com</p>
-                <p class="mb-2 small"><strong>Ort:</strong> Malmö</p>
-                <p class="mb-0 small"><strong>Körkort:</strong> B</p>
-            </div>
+                <div class="card reveal">
+                    <p class="card-label">Kontakt</p>
+                    <ul class="info-list">
+                        <li><span class="info-key">Telefon</span><span class="info-val">070-582 82 22</span></li>
+                        <li><span class="info-key">E-post</span><span class="info-val">wille.borg.c@@gmail.com</span></li>
+                        <li><span class="info-key">Ort</span><span class="info-val">Malmö</span></li>
+                        <li><span class="info-key">Körkort</span><span class="info-val">B</span></li>
+                    </ul>
+                </div>
+            </aside>
         </div>
     </div>
-
-    <div class="mt-5 p-4 bg-white rounded-3 shadow-sm text-center">
-        <p class="text-muted mb-3">Vill du se hela CV:t som PDF?</p>
-        <a href="/cv-william-borg.pdf" target="_blank" class="btn btn-outline-dark me-2">Öppna PDF</a>
-        <a href="/cv-william-borg.pdf" download="CV of William Technical & SWE" class="btn btn-dark">Ladda ner</a>
-    </div>
-</div>
+</section>

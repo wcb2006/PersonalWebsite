@@ -1,283 +1,308 @@
-@using PersonalWebsite.Models
 @using PersonalWebsite.ViewModels
 @model HomeViewModel
 @{
     ViewData["Title"] = "Om mig";
     var about = Model.About;
+    var projectCount = Model.Projects.Count;
+    var latestYear = Model.Projects.Any() ? Model.Projects.Max(p => p.Year) : DateTime.Now.Year;
+
+    // Hero visar första meningen; hela texten hamnar i "Om mig" längre ned.
+    var bio = about?.Bio?.Trim() ?? string.Empty;
+    var firstStop = bio.IndexOf(". ", StringComparison.Ordinal);
+    var heroIntro = firstStop > 40 ? bio[..(firstStop + 1)] : bio;
+    var hasMoreBio = heroIntro.Length < bio.Length;
 }
 
-<style>
-    /* ── Slideshow ── */
-    .slideshow-section {
-        background: #0d0d0d;
-        padding: 70px 0;
-    }
-    .slideshow-wrapper { position: relative; overflow: hidden; }
-    .slides-track { display: flex; transition: transform 0.6s cubic-bezier(0.77,0,0.18,1); }
-    .slide { min-width: 100%; padding: 0 60px; box-sizing: border-box; }
-    .project-card-inner {
-        position: relative; border-radius: 20px; overflow: hidden;
-        cursor: pointer; max-width: 900px; margin: 0 auto;
-        aspect-ratio: 16/9; background: #1a1a1a;
-        box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    }
-    .project-card-inner img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s; }
-    .project-card-inner:hover img { transform: scale(1.04); }
-    .project-no-image { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; background: linear-gradient(135deg, #1a1a1a, #333); }
-    .project-overlay {
-        position:absolute; bottom:0; left:0; right:0;
-        background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-        padding: 40px 40px 30px; color: white;
-    }
-    .project-overlay h2 { font-size:2rem; font-weight:700; margin-bottom:8px; }
-    .project-overlay p { font-size:1rem; opacity:0.8; margin-bottom:14px; max-width:600px; }
-    .project-link-btn {
-        display:inline-block; padding:10px 24px; background:white; color:#0d0d0d;
-        border-radius:50px; font-weight:600; font-size:0.9rem; text-decoration:none; transition:0.2s;
-    }
-    .project-link-btn:hover { background:#e0e0e0; transform:scale(1.05); color:#0d0d0d; }
-    .year-badge {
-        position:absolute; top:20px; right:20px;
-        background:rgba(255,255,255,0.15); backdrop-filter:blur(8px);
-        color:white; padding:5px 14px; border-radius:50px; font-size:0.85rem; font-weight:600;
-    }
-    .tech-badge {
-        display:inline-block; background:rgba(255,255,255,0.15); backdrop-filter:blur(4px);
-        color:white; padding:3px 12px; border-radius:50px; font-size:0.78rem; margin-right:6px; margin-bottom:6px;
-    }
-    .slide-btn {
-        position:absolute; top:50%; transform:translateY(-50%);
-        background:rgba(255,255,255,0.1); backdrop-filter:blur(6px);
-        border:1px solid rgba(255,255,255,0.2); color:white;
-        width:52px; height:52px; border-radius:50%; font-size:1.3rem;
-        display:flex; align-items:center; justify-content:center;
-        cursor:pointer; z-index:10; transition:background 0.2s; user-select:none;
-    }
-    .slide-btn:hover { background:rgba(255,255,255,0.25); }
-    .slide-btn.prev { left:12px; }
-    .slide-btn.next { right:12px; }
-    .slide-dots { display:flex; justify-content:center; gap:10px; margin-top:24px; }
-    .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:0.3s; }
-    .dot.active { background:white; transform:scale(1.3); }
-    .slide-counter { text-align:center; color:rgba(255,255,255,0.4); font-size:0.85rem; margin-top:10px; letter-spacing:2px; }
-    .slideshow-header { text-align:center; color:white; margin-bottom:36px; }
-    .slideshow-header h2 { font-size:2rem; font-weight:700; }
-    .slideshow-header p { color:rgba(255,255,255,0.4); font-size:0.95rem; }
-</style>
+<!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-glow hero-glow--a"></div>
+    <div class="hero-glow hero-glow--b"></div>
 
-<!-- Hero -->
-<div class="hero-section">
-    <div class="hero-blob blob-yellow"></div>
-    <div class="hero-blob blob-blue"></div>
-    <div class="hero-blob blob-dark"></div>
-    <div class="container text-center">
-        <img src="~/images/Profilepic.png" alt="Profilbild" class="rounded-circle mb-4"
-             style="width:100px;height:100px;object-fit:cover;object-position:center 50%;transform:scale(1.5);border:3px solid white;" />
-        <h1 class="display-4 fw-bold">@about?.Name</h1>
-        <p class="lead text-white-50">@about?.Title</p>
-        <div class="mt-3">
-            @if (!string.IsNullOrEmpty(about?.GithubUrl))
+    <div class="container hero-inner">
+        <div>
+            <span class="hero-status">
+                <span class="status-dot"></span>
+                Öppen för nya uppdrag
+            </span>
+
+            <h1 class="hero-title">
+                @(string.IsNullOrEmpty(about?.Name) ? "William Borg" : about!.Name)<span class="dim">.</span>
+            </h1>
+
+            @if (!string.IsNullOrEmpty(about?.Title))
             {
-                <a href="@about.GithubUrl" target="_blank" class="btn btn-outline-light me-2">GitHub</a>
+                <p class="eyebrow">@about!.Title</p>
             }
-            @if (!string.IsNullOrEmpty(about?.LinkedInUrl))
+
+            @if (!string.IsNullOrEmpty(heroIntro))
             {
-                <a href="@about.LinkedInUrl" target="_blank" class="btn btn-outline-light">LinkedIn</a>
+                <p class="hero-bio">@heroIntro</p>
             }
-        </div>
-    </div>
-</div>
 
-<!-- Om mig -->
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <h2 class="section-title mb-4">Om mig</h2>
-            <p class="lead">@about?.Bio</p>
-        </div>
-    </div>
-</div>
-
-<!-- Kompetenser -->
-<div style="background:#f0f2f5; padding: 60px 0;">
-    <div class="container">
-        <h2 class="section-title mb-5 text-center" style="border-left:none; padding-left:0;">Kompetenser</h2>
-        <div class="row g-4 justify-content-center">
-            @{
-                var skills = new[]
+            <div class="hero-actions">
+                <a class="btn-solid" asp-controller="Projects" asp-action="Index">
+                    Se mina projekt <span class="btn-arrow">&rarr;</span>
+                </a>
+                @if (!string.IsNullOrEmpty(about?.GithubUrl))
                 {
-                    new { Name = "Python",     Icon = "devicon-python-plain colored" },
-                    new { Name = "C#",         Icon = "devicon-csharp-plain colored" },
-                    new { Name = "SQL",        Icon = "devicon-postgresql-plain colored" },
-                    new { Name = "JavaScript", Icon = "devicon-javascript-plain colored" },
-                    new { Name = "Git",        Icon = "devicon-git-plain colored" },
-                    new { Name = "MongoDB",    Icon = "devicon-mongodb-plain colored" },
-                };
-            }
-            @foreach (var skill in skills)
-            {
-                <div class="col-6 col-sm-4 col-md-3">
-                    <div class="card p-4 text-center h-100">
-                        <i class="@skill.Icon" style="font-size:3.5rem;"></i>
-                        <p class="mb-0 mt-3 fw-semibold">@skill.Name</p>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-<!-- Projekt slideshow -->
-@if (Model.Projects.Any())
-{
-    <div class="slideshow-section">
-        <div class="slideshow-header">
-            <h2>Mina Projekt</h2>
-            <p>Klicka för att besöka — använd pilarna eller tangentbordets ← →</p>
-        </div>
-
-        <div class="slideshow-wrapper">
-            <button class="slide-btn prev" onclick="changeSlide(-1)">&#8592;</button>
-            <button class="slide-btn next" onclick="changeSlide(1)">&#8594;</button>
-
-            <div class="slides-track" id="slidesTrack">
-                @foreach (var project in Model.Projects)
+                    <a class="btn-ghost" href="@about!.GithubUrl" target="_blank" rel="noopener">
+                        <i class="bi bi-github"></i> GitHub
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(about?.LinkedInUrl))
                 {
-                    <div class="slide">
-                        @if (!string.IsNullOrEmpty(project.ProjectUrl))
-                        {
-                            <a href="@project.ProjectUrl" target="_blank" class="project-card-inner d-block text-decoration-none">
-                                @if (!string.IsNullOrEmpty(project.ImageUrl))
-                                {
-                                    <img src="@project.ImageUrl" alt="@project.Title" />
-                                }
-                                else
-                                {
-                                    <div class="project-no-image"><i class="bi bi-code-slash"></i></div>
-                                }
-                                <span class="year-badge">@project.Year</span>
-                                <div class="project-overlay">
-                                    @if (!string.IsNullOrEmpty(project.Technologies))
-                                    {
-                                        <div class="mb-2">
-                                            @foreach (var tech in project.Technologies.Split(','))
-                                            {
-                                                <span class="tech-badge">@tech.Trim()</span>
-                                            }
-                                        </div>
-                                    }
-                                    <h2>@project.Title</h2>
-                                    <p>@project.Description</p>
-                                    <span class="project-link-btn">Besök projekt →</span>
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                            <div class="project-card-inner">
-                                @if (!string.IsNullOrEmpty(project.ImageUrl))
-                                {
-                                    <img src="@project.ImageUrl" alt="@project.Title" />
-                                }
-                                else
-                                {
-                                    <div class="project-no-image"><i class="bi bi-code-slash"></i></div>
-                                }
-                                <span class="year-badge">@project.Year</span>
-                                <div class="project-overlay">
-                                    @if (!string.IsNullOrEmpty(project.Technologies))
-                                    {
-                                        <div class="mb-2">
-                                            @foreach (var tech in project.Technologies.Split(','))
-                                            {
-                                                <span class="tech-badge">@tech.Trim()</span>
-                                            }
-                                        </div>
-                                    }
-                                    <h2>@project.Title</h2>
-                                    <p>@project.Description</p>
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <a class="btn-ghost" href="@about!.LinkedInUrl" target="_blank" rel="noopener">
+                        <i class="bi bi-linkedin"></i> LinkedIn
+                    </a>
                 }
             </div>
         </div>
 
-        <div class="slide-dots" id="slideDots">
-            @for (int i = 0; i < Model.Projects.Count; i++)
-            {
-                <div class="dot @(i == 0 ? "active" : "")" onclick="goToSlide(@i)"></div>
-            }
+        <div class="hero-portrait">
+            <img src="~/images/Profilepic.png" alt="Porträtt av William Borg" />
         </div>
-        <div class="slide-counter"><span id="currentSlide">1</span> / @Model.Projects.Count</div>
     </div>
-}
+</section>
 
-<!-- Snabblänkar -->
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <a asp-controller="Projects" asp-action="Index" class="text-decoration-none">
-                        <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2"><i class="bi bi-code-slash"></i></div>
-                            <h5>Alla projekt</h5>
-                            <p class="text-muted small">Se alla mina projekt</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a asp-controller="Cv" asp-action="Index" class="text-decoration-none">
-                        <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2"><i class="bi bi-file-earmark-text"></i></div>
-                            <h5>CV</h5>
-                            <p class="text-muted small">Erfarenheter och utbildning</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a asp-controller="Contact" asp-action="Index" class="text-decoration-none">
-                        <div class="card p-4 text-center h-100">
-                            <div class="fs-1 mb-2"><i class="bi bi-envelope"></i></div>
-                            <h5>Kontakt</h5>
-                            <p class="text-muted small">Skicka ett meddelande</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+<!-- ── Nyckeltal ────────────────────────────────────────────────────────── -->
+<div class="container">
+    <div class="stat-row">
+        <div class="stat">
+            <p class="stat-value">@projectCount</p>
+            <p class="stat-label">Projekt</p>
+        </div>
+        <div class="stat">
+            <p class="stat-value">@latestYear</p>
+            <p class="stat-label">Senaste bygget</p>
+        </div>
+        <div class="stat">
+            <p class="stat-value">Malmö</p>
+            <p class="stat-label">Baserad i</p>
+        </div>
+        <div class="stat">
+            <p class="stat-value">C# &amp; Python</p>
+            <p class="stat-label">Främst i</p>
         </div>
     </div>
 </div>
 
+<!-- ── Om mig ───────────────────────────────────────────────────────────── -->
+@if (hasMoreBio)
+{
+    <section class="section">
+        <div class="container narrow reveal">
+            <p class="eyebrow">Om mig</p>
+            <h2 class="section-title">Bakom koden</h2>
+            <p class="section-lead">@bio</p>
+        </div>
+    </section>
+}
+
+<!-- ── Kompetenser ──────────────────────────────────────────────────────── -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head centered reveal">
+            <p class="eyebrow centered">Verktygslåda</p>
+            <h2 class="section-title">Teknik jag jobbar i</h2>
+            <p class="section-lead">Språk och verktyg jag använder dagligen i skolan och i egna projekt.</p>
+        </div>
+
+        @{
+            var skills = new[]
+            {
+                new { Name = "Python",     Icon = "devicon-python-plain colored" },
+                new { Name = "C#",         Icon = "devicon-csharp-plain colored" },
+                new { Name = ".NET",       Icon = "devicon-dotnetcore-plain colored" },
+                new { Name = "PostgreSQL", Icon = "devicon-postgresql-plain colored" },
+                new { Name = "JavaScript", Icon = "devicon-javascript-plain colored" },
+                new { Name = "MongoDB",    Icon = "devicon-mongodb-plain colored" },
+                new { Name = "Git",        Icon = "devicon-git-plain colored" },
+                new { Name = "Docker",     Icon = "devicon-docker-plain colored" },
+            };
+        }
+
+        <div class="skill-grid reveal">
+            @foreach (var skill in skills)
+            {
+                <div class="skill">
+                    <i class="@skill.Icon" aria-hidden="true"></i>
+                    <span>@skill.Name</span>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ── Utvalda projekt ──────────────────────────────────────────────────── -->
+@if (Model.Projects.Any())
+{
+    <section class="section">
+        <div class="container">
+            <div class="section-head flex-between reveal">
+                <div>
+                    <p class="eyebrow">Utvalt arbete</p>
+                    <h2 class="section-title" style="margin-bottom:0">Mina projekt</h2>
+                </div>
+                <a class="btn-ghost btn-sm" asp-controller="Projects" asp-action="Index">
+                    Alla projekt <span class="btn-arrow">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="slideshow reveal">
+                @if (Model.Projects.Count > 1)
+                {
+                    <button class="slide-nav slide-nav--prev" type="button" data-slide="-1" aria-label="Föregående projekt">&#8592;</button>
+                    <button class="slide-nav slide-nav--next" type="button" data-slide="1" aria-label="Nästa projekt">&#8594;</button>
+                }
+
+                <div class="slides-viewport">
+                    <div class="slides-track" id="slidesTrack">
+                        @foreach (var project in Model.Projects)
+                        {
+                            var hasLink = !string.IsNullOrEmpty(project.ProjectUrl);
+                            <div class="slide">
+                                @if (hasLink)
+                                {
+                                    <a class="showcase" href="@project.ProjectUrl" target="_blank" rel="noopener">
+                                        @if (!string.IsNullOrEmpty(project.ImageUrl))
+                                        {
+                                            <img src="@project.ImageUrl" alt="@project.Title" loading="lazy" />
+                                        }
+                                        else
+                                        {
+                                            <div class="showcase-fallback"><i class="bi bi-code-slash"></i></div>
+                                        }
+                                        <span class="showcase-year">@project.Year</span>
+                                        <div class="showcase-overlay">
+                                            @if (!string.IsNullOrEmpty(project.Technologies))
+                                            {
+                                                <div class="tag-row" style="margin-bottom:14px">
+                                                    @foreach (var tech in project.Technologies.Split(','))
+                                                    {
+                                                        <span class="tag">@tech.Trim()</span>
+                                                    }
+                                                </div>
+                                            }
+                                            <h3>@project.Title</h3>
+                                            <p>@project.Description</p>
+                                            <span class="btn-solid btn-sm">Besök projekt <span class="btn-arrow">&rarr;</span></span>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <div class="showcase">
+                                        @if (!string.IsNullOrEmpty(project.ImageUrl))
+                                        {
+                                            <img src="@project.ImageUrl" alt="@project.Title" loading="lazy" />
+                                        }
+                                        else
+                                        {
+                                            <div class="showcase-fallback"><i class="bi bi-code-slash"></i></div>
+                                        }
+                                        <span class="showcase-year">@project.Year</span>
+                                        <div class="showcase-overlay">
+                                            @if (!string.IsNullOrEmpty(project.Technologies))
+                                            {
+                                                <div class="tag-row" style="margin-bottom:14px">
+                                                    @foreach (var tech in project.Technologies.Split(','))
+                                                    {
+                                                        <span class="tag">@tech.Trim()</span>
+                                                    }
+                                                </div>
+                                            }
+                                            <h3>@project.Title</h3>
+                                            <p>@project.Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @if (Model.Projects.Count > 1)
+                {
+                    <div class="slide-footer">
+                        <div class="slide-dots" id="slideDots">
+                            @for (int i = 0; i < Model.Projects.Count; i++)
+                            {
+                                <button class="dot @(i == 0 ? "is-active" : "")" type="button" data-index="@i"
+                                        aria-label="Gå till projekt @(i + 1)"></button>
+                            }
+                        </div>
+                        <span class="slide-counter"><span id="currentSlide">1</span> / @Model.Projects.Count</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ── Snabblänkar ──────────────────────────────────────────────────────── -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="grid-3">
+            <a class="card card--hover reveal" asp-controller="Projects" asp-action="Index">
+                <p class="card-label"><i class="bi bi-code-slash"></i> 01</p>
+                <h3 class="card-title">Alla projekt</h3>
+                <p class="card-text">Skolprojekt och egna bygg, samlade på ett ställe.</p>
+            </a>
+            <a class="card card--hover reveal" asp-controller="Cv" asp-action="Index">
+                <p class="card-label"><i class="bi bi-file-earmark-text"></i> 02</p>
+                <h3 class="card-title">CV</h3>
+                <p class="card-text">Erfarenhet, utbildning och certifikat — även som PDF.</p>
+            </a>
+            <a class="card card--hover reveal" asp-controller="Contact" asp-action="Index">
+                <p class="card-label"><i class="bi bi-envelope"></i> 03</p>
+                <h3 class="card-title">Kontakt</h3>
+                <p class="card-text">Skicka ett meddelande så hör jag av mig.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
 @section Scripts {
-<script>
-    let current = 0;
-    const total = @Model.Projects.Count;
-    const track = document.getElementById('slidesTrack');
-    const dots = document.querySelectorAll('.dot');
-    const counter = document.getElementById('currentSlide');
+    <script>
+        (function () {
+            var track = document.getElementById('slidesTrack');
+            if (!track) return;
 
-    function goToSlide(n) {
-        current = (n + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
-        counter.textContent = current + 1;
-    }
+            var total = track.children.length;
+            var dots = Array.prototype.slice.call(document.querySelectorAll('#slideDots .dot'));
+            var counter = document.getElementById('currentSlide');
+            var current = 0;
 
-    function changeSlide(dir) { goToSlide(current + dir); }
+            function goTo(n) {
+                current = (n % total + total) % total;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+                if (counter) counter.textContent = current + 1;
+            }
 
-    let touchStartX = 0;
-    track.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
-    track.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
-    });
+            document.querySelectorAll('[data-slide]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    goTo(current + Number(btn.dataset.slide));
+                });
+            });
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') changeSlide(1);
-        if (e.key === 'ArrowLeft') changeSlide(-1);
-    });
-</script>
+            dots.forEach(function (d) {
+                d.addEventListener('click', function () { goTo(Number(d.dataset.index)); });
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowRight') goTo(current + 1);
+                if (e.key === 'ArrowLeft') goTo(current - 1);
+            });
+
+            var startX = null;
+            track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', function (e) {
+                if (startX === null) return;
+                var diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+                startX = null;
+            }, { passive: true });
+        })();
+    </script>
 }

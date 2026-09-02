@@ -1,9 +1,20 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+// Railway terminerar TLS i sin egen proxy och skickar vidare ren http till containern.
+// Utan detta tror appen att trafiken är osäker och bygger http-länkar i stället för https.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    // Proxyns IP är okänd i förväg, så vi kan inte lista den som betrodd.
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 string connectionString;
@@ -30,6 +41,9 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
+
+// Måste ligga före UseHttpsRedirection så att appen ser det ursprungliga https-schemat.
+app.UseForwardedHeaders();
 
 if (!app.Environment.IsDevelopment())
 {
