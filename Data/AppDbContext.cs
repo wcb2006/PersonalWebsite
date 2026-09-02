@@ -66,7 +66,7 @@ public class AppDbContext : DbContext
                 Id = 4,
                 Title = "CoupleSpace",
                 Description = "En webbaserad applikation där par kan skapa en gemensam",
-                ImageUrl = "/images/couplespace.png",
+                ImageUrl = "",
                 ProjectUrl = "https://web-production-61386.up.railway.app/login",
                 Year = 2026,
                 Technologies = "C#, TypeScript, .NET, Next.js, PostgreSQL",
