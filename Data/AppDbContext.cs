@@ -58,7 +58,7 @@ public class AppDbContext : DbContext
                 ImageUrl = "/images/spelhyllan.png",
                 ProjectUrl = "https://spelhyllan-production.up.railway.app",
                 Year = 2026,
-                Technologies = "C#, ASP.NET Core, PostgreSQL, JavaScript",
+                Technologies = "JavaScript, Node.js, HTML, CSS, json-server",
                 Category = "personal"
             }
         );

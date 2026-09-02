@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalWebsite.Data;
@@ -11,9 +12,11 @@ using PersonalWebsite.Data;
 namespace PersonalWebsite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260902151653_FixSpelHyllanImage")]
+    partial class FixSpelHyllanImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -410,7 +413,7 @@ namespace PersonalWebsite.Migrations
                             Description = "En webbaserad applikation där man kan lägga till, redigera och ta bort spel i sin samling. Användare kan även betygsätta spelen",
                             ImageUrl = "/images/spelhyllan.png",
                             ProjectUrl = "https://spelhyllan-production.up.railway.app",
-                            Technologies = "JavaScript, Node.js, HTML, CSS, json-server",
+                            Technologies = "C#, ASP.NET Core, PostgreSQL, JavaScript",
                             Title = "Spel Hyllan",
                             Year = 2026
                         });
