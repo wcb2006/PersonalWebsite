@@ -827,16 +827,22 @@ a.card:hover {
    Kompetensrutnät
    -------------------------------------------------------------------------- */
 
-/* Fasta kolumner så att sista raden aldrig blir ensam */
+/* Flex i stället för grid: en ofylld sista rad centreras i stället för att
+   lämna ett hål till höger, så antalet kompetenser kan ändras fritt. */
 .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
 }
 
+.skill-grid > .skill {
+    flex: 0 1 calc(50% - 7px);
+}
+
 @media (min-width: 560px) {
-    .skill-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+    .skill-grid > .skill {
+        flex: 0 1 calc(25% - 10.5px);
     }
 }
 

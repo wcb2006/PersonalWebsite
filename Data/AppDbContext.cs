@@ -60,6 +60,16 @@ public class AppDbContext : DbContext
                 Year = 2026,
                 Technologies = "JavaScript, Node.js, HTML, CSS, json-server",
                 Category = "personal"
+            },
+            new Project
+            {
+                Id = 4,
+                Title = "CoupleSpace",
+                Description = "En webbaserad applikation där par kan skapa en gemensam",
+                ProjectUrl = "https://web-production-61386.up.railway.app/login",
+                Year = 2026,
+                Technologies = "C#, TypeScript, .NET, Next.js, PostgreSQL",
+                Category = "personal"
             }
         );
 
