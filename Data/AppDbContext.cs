@@ -65,7 +65,7 @@ public class AppDbContext : DbContext
             {
                 Id = 4,
                 Title = "CoupleSpace",
-                Description = "En webbaserad applikation där par kan skapa en gemensam",
+                Description = "En webbaserad applikation där par kan tillbringa tid tillsammans",
                 ImageUrl = "",
                 ProjectUrl = "https://web-production-61386.up.railway.app/login",
                 Year = 2026,
