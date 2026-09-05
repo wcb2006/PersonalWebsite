@@ -4,9 +4,9 @@
     var category = ViewData["Category"] as string;
     var heading = category switch
     {
-        "school" => "Skolprojekt",
-        "personal" => "Mina projekt",
-        _ => "Alla projekt"
+        "school" => Localizer["Skolprojekt"],
+        "personal" => Localizer["Mina projekt"],
+        _ => Localizer["Alla projekt"]
     };
     ViewData["Title"] = heading;
 }
@@ -14,25 +14,25 @@
 <section class="section">
     <div class="container">
         <div class="section-head reveal">
-            <p class="eyebrow">Portfölj</p>
+            <p class="eyebrow">@Localizer["Portfölj"]</p>
             <h2 class="section-title">@heading</h2>
             <p class="section-lead">
                 @(Model.Any()
-                    ? $"{Model.Count} projekt — klicka för att se koden eller den körande appen."
-                    : "Här dyker projekten upp så fort de är publicerade.")
+                    ? Localizer["{0} projekt — klicka för att se koden eller den körande appen.", Model.Count]
+                    : Localizer["Här dyker projekten upp så fort de är publicerade."])
             </p>
         </div>
 
         <div class="tag-row reveal" style="margin-bottom:36px">
-            <a class="@(category == null ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index">Alla</a>
-            <a class="@(category == "school" ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index" asp-route-category="school">Skolprojekt</a>
-            <a class="@(category == "personal" ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index" asp-route-category="personal">Mina projekt</a>
+            <a class="@(category == null ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index">@Localizer["Alla"]</a>
+            <a class="@(category == "school" ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index" asp-route-category="school">@Localizer["Skolprojekt"]</a>
+            <a class="@(category == "personal" ? "tag tag--solid" : "tag")" asp-controller="Projects" asp-action="Index" asp-route-category="personal">@Localizer["Mina projekt"]</a>
         </div>
 
         @if (!Model.Any())
         {
             <div class="card" style="text-align:center;padding:56px 24px">
-                <p class="card-text">Inga projekt i den här kategorin ännu.</p>
+                <p class="card-text">@Localizer["Inga projekt i den här kategorin ännu."]</p>
             </div>
         }
         else
@@ -44,7 +44,7 @@
                         <div class="project-thumb">
                             @if (!string.IsNullOrEmpty(project.ImageUrl))
                             {
-                                <img src="@project.ImageUrl" alt="@project.Title" loading="lazy" />
+                                <img src="@project.ImageUrl" alt="@LocalizedText.Pick(project.Title, project.TitleEn)" loading="lazy" />
                             }
                             else
                             {
@@ -55,10 +55,10 @@
 
                         <div class="project-body">
                             <div class="project-head">
-                                <h3 class="card-title">@project.Title</h3>
+                                <h3 class="card-title">@LocalizedText.Pick(project.Title, project.TitleEn)</h3>
                             </div>
 
-                            <p class="card-text">@project.Description</p>
+                            <p class="card-text">@LocalizedText.Pick(project.Description, project.DescriptionEn)</p>
 
                             @if (!string.IsNullOrEmpty(project.Technologies))
                             {
@@ -74,7 +74,7 @@
                             {
                                 <a class="btn-ghost btn-sm" href="@project.ProjectUrl" target="_blank" rel="noopener"
                                    style="align-self:flex-start">
-                                    Visa projekt <span class="btn-arrow">&rarr;</span>
+                                    @Localizer["Visa projekt"] <span class="btn-arrow">&rarr;</span>
                                 </a>
                             }
                         </div>

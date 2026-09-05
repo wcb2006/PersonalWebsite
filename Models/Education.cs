@@ -8,5 +8,7 @@ public class Education
     public int StartYear { get; set; }
     public int? EndYear { get; set; }
     public string? Description { get; set; }
+    public string? DegreeEn { get; set; }
+    public string? DescriptionEn { get; set; }
     public List<Course> Courses { get; set; } = new();
 }

@@ -6,6 +6,8 @@ public class Course
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public string? Grade { get; set; }
+    public string? NameEn { get; set; }
+    public string? DescriptionEn { get; set; }
     public DateTime? StartDate { get; set; }
     public int EducationId { get; set; }
     public Education Education { get; set; } = null!;

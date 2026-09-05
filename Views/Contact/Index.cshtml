@@ -1,17 +1,17 @@
 @using PersonalWebsite.Models
 @model ContactMessage
 @{
-    ViewData["Title"] = "Kontakt";
+    ViewData["Title"] = Localizer["Kontakt"];
 }
 
 <section class="section">
     <div class="container">
         <div class="split">
             <div class="card reveal" style="padding:clamp(24px, 4vw, 40px)">
-                <p class="eyebrow">Skriv till mig</p>
-                <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem)">Hör av dig</h2>
+                <p class="eyebrow">@Localizer["Skriv till mig"]</p>
+                <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem)">@Localizer["Hör av dig"]</h2>
                 <p class="section-lead" style="margin-bottom:28px">
-                    Fyll i formuläret så återkommer jag så snart jag kan.
+                    @Localizer["Fyll i formuläret så återkommer jag så snart jag kan."]
                 </p>
 
                 <form asp-action="Index" method="post">
@@ -20,51 +20,51 @@
 
                     <div class="grid-2" style="gap:0 18px">
                         <div class="field">
-                            <label asp-for="Name">Namn</label>
-                            <input asp-for="Name" class="form-control" placeholder="Ditt namn" autocomplete="name" />
+                            <label asp-for="Name">@Localizer["Namn"]</label>
+                            <input asp-for="Name" class="form-control" placeholder="@Localizer["Ditt namn"]" autocomplete="name" />
                             <span asp-validation-for="Name" class="field-error"></span>
                         </div>
 
                         <div class="field">
-                            <label asp-for="Email">E-post</label>
-                            <input asp-for="Email" class="form-control" placeholder="din@@epost.se" autocomplete="email" />
+                            <label asp-for="Email">@Localizer["E-post"]</label>
+                            <input asp-for="Email" class="form-control" placeholder="@Localizer["din@epost.se"]" autocomplete="email" />
                             <span asp-validation-for="Email" class="field-error"></span>
                         </div>
                     </div>
 
                     <div class="field">
-                        <label asp-for="Subject">Ämne</label>
-                        <input asp-for="Subject" class="form-control" placeholder="Vad gäller det?" />
+                        <label asp-for="Subject">@Localizer["Ämne"]</label>
+                        <input asp-for="Subject" class="form-control" placeholder="@Localizer["Vad gäller det?"]" />
                         <span asp-validation-for="Subject" class="field-error"></span>
                     </div>
 
                     <div class="field">
-                        <label asp-for="Message">Meddelande</label>
-                        <textarea asp-for="Message" class="form-control" rows="6" placeholder="Skriv ditt meddelande här…"></textarea>
+                        <label asp-for="Message">@Localizer["Meddelande"]</label>
+                        <textarea asp-for="Message" class="form-control" rows="6" placeholder="@Localizer["Skriv ditt meddelande här…"]"></textarea>
                         <span asp-validation-for="Message" class="field-error"></span>
                     </div>
 
                     <button type="submit" class="btn-solid btn-block" style="margin-top:8px">
-                        Skicka meddelande <span class="btn-arrow">&rarr;</span>
+                        @Localizer["Skicka meddelande"] <span class="btn-arrow">&rarr;</span>
                     </button>
                 </form>
             </div>
 
             <aside class="stack">
                 <div class="card reveal">
-                    <p class="card-label">Direkt</p>
+                    <p class="card-label">@Localizer["Direkt"]</p>
                     <ul class="info-list">
-                        <li><span class="info-key">E-post</span><span class="info-val">wille.borg.c@@gmail.com</span></li>
-                        <li><span class="info-key">Telefon</span><span class="info-val">070-582 82 22</span></li>
-                        <li><span class="info-key">Ort</span><span class="info-val">Malmö, Sverige</span></li>
+                        <li><span class="info-key">@Localizer["E-post"]</span><span class="info-val">wille.borg.c@@gmail.com</span></li>
+                        <li><span class="info-key">@Localizer["Telefon"]</span><span class="info-val">070-582 82 22</span></li>
+                        <li><span class="info-key">@Localizer["Ort"]</span><span class="info-val">@Localizer["Malmö, Sverige"]</span></li>
                     </ul>
                 </div>
 
                 <div class="card reveal">
-                    <p class="card-label">Svarstid</p>
+                    <p class="card-label">@Localizer["Svarstid"]</p>
                     <p class="card-text">
                         <span class="hero-status" style="margin:0">
-                            <span class="status-dot"></span> Oftast inom ett dygn
+                            <span class="status-dot"></span> @Localizer["Oftast inom ett dygn"]
                         </span>
                     </p>
                 </div>

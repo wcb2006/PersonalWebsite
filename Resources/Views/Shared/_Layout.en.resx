@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="William Borg – utvecklare från Malmö. Projekt, CV och kontakt." xml:space="preserve">
+    <value>William Borg – developer from Malmö. Projects, CV and contact.</value>
+  </data>
+  <data name="Huvudmeny" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
+  <data name="Meny" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Om mig" xml:space="preserve">
+    <value>About me</value>
+  </data>
+  <data name="Projekt" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Alla projekt" xml:space="preserve">
+    <value>All projects</value>
+  </data>
+  <data name="Skolprojekt" xml:space="preserve">
+    <value>School projects</value>
+  </data>
+  <data name="Mina projekt" xml:space="preserve">
+    <value>My projects</value>
+  </data>
+  <data name="Utbildning" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="Kontakt" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Har du ett ärende?" xml:space="preserve">
+    <value>Got something in mind?</value>
+  </data>
+  <data name="Hör gärna av dig — jag svarar oftast inom ett dygn." xml:space="preserve">
+    <value>Feel free to reach out — I usually reply within a day.</value>
+  </data>
+  <data name="Kontakta mig" xml:space="preserve">
+    <value>Get in touch</value>
+  </data>
+  <data name="Se CV" xml:space="preserve">
+    <value>View CV</value>
+  </data>
+  <data name="Byggd med ASP.NET Core och PostgreSQL" xml:space="preserve">
+    <value>Built with ASP.NET Core and PostgreSQL</value>
+  </data>
+  <data name="Byt språk" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="Integritetspolicy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
+</root>

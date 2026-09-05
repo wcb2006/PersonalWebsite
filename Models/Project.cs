@@ -5,6 +5,8 @@ public class Project
     public int Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public string? TitleEn { get; set; }
+    public string? DescriptionEn { get; set; }
     public string? ImageUrl { get; set; }
     public string? ProjectUrl { get; set; }
     public string? Technologies { get; set; }

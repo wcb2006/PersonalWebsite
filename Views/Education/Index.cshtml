@@ -1,21 +1,21 @@
 @using PersonalWebsite.Models
 @model List<Education>
 @{
-    ViewData["Title"] = "Utbildning";
+    ViewData["Title"] = Localizer["Utbildning"];
 }
 
 <section class="section">
     <div class="container">
         <div class="section-head reveal">
-            <p class="eyebrow">Studier</p>
-            <h2 class="section-title">Utbildning</h2>
-            <p class="section-lead">Program, kurser och betyg — uppdaterat löpande.</p>
+            <p class="eyebrow">@Localizer["Studier"]</p>
+            <h2 class="section-title">@Localizer["Utbildning"]</h2>
+            <p class="section-lead">@Localizer["Program, kurser och betyg — uppdaterat löpande."]</p>
         </div>
 
         @if (!Model.Any())
         {
             <div class="card" style="text-align:center;padding:56px 24px">
-                <p class="card-text">Inga utbildningar tillagda ännu.</p>
+                <p class="card-text">@Localizer["Inga utbildningar tillagda ännu."]</p>
             </div>
         }
 
@@ -24,25 +24,25 @@
             <article class="reveal" style="margin-bottom:64px">
                 <div class="card" style="margin-bottom:24px">
                     <p class="timeline-meta">
-                        @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : "Pågående")
+                        @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : Localizer["Pågående"].Value)
                     </p>
-                    <h3 class="timeline-role" style="font-size:1.4rem">@edu.Degree</h3>
+                    <h3 class="timeline-role" style="font-size:1.4rem">@LocalizedText.Pick(edu.Degree, edu.DegreeEn)</h3>
                     <p class="timeline-org">@edu.School</p>
                     @if (!string.IsNullOrEmpty(edu.Description))
                     {
-                        <p class="timeline-desc" style="margin-top:8px">@edu.Description</p>
+                        <p class="timeline-desc" style="margin-top:8px">@LocalizedText.Pick(edu.Description, edu.DescriptionEn)</p>
                     }
                 </div>
 
                 @if (edu.Courses.Any())
                 {
-                    <p class="card-label" style="padding-left:2px">Kurser · @edu.Courses.Count</p>
+                    <p class="card-label" style="padding-left:2px">@Localizer["Kurser"] · @edu.Courses.Count</p>
                     <div class="grid-2">
                         @foreach (var course in edu.Courses.OrderBy(c => c.StartDate))
                         {
                             <div class="card card--hover" style="padding:20px">
                                 <div class="project-head" style="margin-bottom:8px">
-                                    <h4 class="card-title" style="font-size:.98rem">@course.Name</h4>
+                                    <h4 class="card-title" style="font-size:.98rem">@LocalizedText.Pick(course.Name, course.NameEn)</h4>
                                     @if (!string.IsNullOrEmpty(course.Grade))
                                     {
                                         <span class="tag tag--solid">@course.Grade</span>
@@ -54,7 +54,7 @@
                                 }
                                 @if (!string.IsNullOrEmpty(course.Description))
                                 {
-                                    <p class="card-text" style="margin-top:8px">@course.Description</p>
+                                    <p class="card-text" style="margin-top:8px">@LocalizedText.Pick(course.Description, course.DescriptionEn)</p>
                                 }
                             </div>
                         }

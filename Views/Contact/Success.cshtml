@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Meddelande skickat";
+    ViewData["Title"] = Localizer["Meddelande skickat"];
 }
 
 <section class="section">
@@ -8,15 +8,15 @@
             <div style="font-size:2.6rem;line-height:1;margin-bottom:20px;color:var(--fg)">
                 <i class="bi bi-check2-circle"></i>
             </div>
-            <h1 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.2rem)">Tack för ditt meddelande!</h1>
+            <h1 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.2rem)">@Localizer["Tack för ditt meddelande!"]</h1>
             <p class="section-lead" style="margin:0 auto 28px">
-                Jag har tagit emot det och återkommer så snart jag kan.
+                @Localizer["Jag har tagit emot det och återkommer så snart jag kan."]
             </p>
             <div class="hero-actions" style="justify-content:center">
                 <a class="btn-solid" asp-controller="Home" asp-action="Index">
-                    Till startsidan <span class="btn-arrow">&rarr;</span>
+                    @Localizer["Till startsidan"] <span class="btn-arrow">&rarr;</span>
                 </a>
-                <a class="btn-ghost" asp-controller="Projects" asp-action="Index">Se projekt</a>
+                <a class="btn-ghost" asp-controller="Projects" asp-action="Index">@Localizer["Se projekt"]</a>
             </div>
         </div>
     </div>

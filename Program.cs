@@ -1,10 +1,24 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Data;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
+
+    builder.Services.Configure<RequestLocalizationOptions>(options =>
+    {
+        var cultures = new[] { new CultureInfo("sv"), new CultureInfo("en") };
+        options.DefaultRequestCulture = new RequestCulture("sv");
+        options.SupportedCultures = cultures;
+        options.SupportedUICultures = cultures;
+    });
 
 // Railway terminerar TLS i sin egen proxy och skickar vidare ren http till containern.
 // Utan detta tror appen att trafiken är osäker och bygger http-länkar i stället för https.
@@ -53,6 +67,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Sätter CurrentCulture/CurrentUICulture per request. Utan den här raden gör
+// registreringarna ovan ingenting - kulturen blir alltid DefaultRequestCulture.
+app.UseRequestLocalization();
+
 app.UseRouting();
 app.UseAuthorization();
 app.MapStaticAssets();

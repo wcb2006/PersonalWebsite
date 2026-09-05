@@ -1,13 +1,14 @@
 @using PersonalWebsite.ViewModels
 @model HomeViewModel
 @{
-    ViewData["Title"] = "Om mig";
+    ViewData["Title"] = Localizer["Om mig"];
     var about = Model.About;
     var projectCount = Model.Projects.Count;
     var latestYear = Model.Projects.Any() ? Model.Projects.Max(p => p.Year) : DateTime.Now.Year;
 
     // Hero visar första meningen; hela texten hamnar i "Om mig" längre ned.
-    var bio = about?.Bio?.Trim() ?? string.Empty;
+    var aboutTitle = LocalizedText.Pick(about?.Title, about?.TitleEn);
+    var bio = LocalizedText.Pick(about?.Bio, about?.BioEn)?.Trim() ?? string.Empty;
     var firstStop = bio.IndexOf(". ", StringComparison.Ordinal);
     var heroIntro = firstStop > 40 ? bio[..(firstStop + 1)] : bio;
     var hasMoreBio = heroIntro.Length < bio.Length;
@@ -22,16 +23,16 @@
         <div>
             <span class="hero-status">
                 <span class="status-dot"></span>
-                Öppen för nya uppdrag
+                @Localizer["Öppen för nya uppdrag"]
             </span>
 
             <h1 class="hero-title">
                 @(string.IsNullOrEmpty(about?.Name) ? "William Borg" : about!.Name)<span class="dim">.</span>
             </h1>
 
-            @if (!string.IsNullOrEmpty(about?.Title))
+            @if (!string.IsNullOrEmpty(aboutTitle))
             {
-                <p class="eyebrow">@about!.Title</p>
+                <p class="eyebrow">@aboutTitle</p>
             }
 
             @if (!string.IsNullOrEmpty(heroIntro))
@@ -41,7 +42,7 @@
 
             <div class="hero-actions">
                 <a class="btn-solid" asp-controller="Projects" asp-action="Index">
-                    Se mina projekt <span class="btn-arrow">&rarr;</span>
+                    @Localizer["Se mina projekt"] <span class="btn-arrow">&rarr;</span>
                 </a>
                 @if (!string.IsNullOrEmpty(about?.GithubUrl))
                 {
@@ -59,7 +60,7 @@
         </div>
 
         <div class="hero-portrait">
-            <img src="~/images/Profilepic.png" alt="Porträtt av William Borg" />
+            <img src="~/images/Profilepic.png" alt="@Localizer["Porträtt av William Borg"]" />
         </div>
     </div>
 </section>
@@ -69,19 +70,19 @@
     <div class="stat-row">
         <div class="stat">
             <p class="stat-value">@projectCount</p>
-            <p class="stat-label">Projekt</p>
+            <p class="stat-label">@Localizer["Projekt"]</p>
         </div>
         <div class="stat">
             <p class="stat-value">@latestYear</p>
-            <p class="stat-label">Senaste bygget</p>
+            <p class="stat-label">@Localizer["Senaste bygget"]</p>
         </div>
         <div class="stat">
             <p class="stat-value">Malmö</p>
-            <p class="stat-label">Baserad i</p>
+            <p class="stat-label">@Localizer["Baserad i"]</p>
         </div>
         <div class="stat">
             <p class="stat-value">C# &amp; .NET</p>
-            <p class="stat-label">Främst i</p>
+            <p class="stat-label">@Localizer["Främst i"]</p>
         </div>
     </div>
 </div>
@@ -91,8 +92,8 @@
 {
     <section class="section">
         <div class="container narrow reveal">
-            <p class="eyebrow">Om mig</p>
-            <h2 class="section-title">Bakom koden</h2>
+            <p class="eyebrow">@Localizer["Om mig"]</p>
+            <h2 class="section-title">@Localizer["Bakom koden"]</h2>
             <p class="section-lead">@bio</p>
         </div>
     </section>
@@ -102,9 +103,9 @@
 <section class="section section--alt">
     <div class="container">
         <div class="section-head centered reveal">
-            <p class="eyebrow centered">Verktygslåda</p>
-            <h2 class="section-title">Teknik jag jobbar i</h2>
-            <p class="section-lead">Språk och verktyg jag använder dagligen i skolan och i egna projekt.</p>
+            <p class="eyebrow centered">@Localizer["Verktygslåda"]</p>
+            <h2 class="section-title">@Localizer["Teknik jag jobbar i"]</h2>
+            <p class="section-lead">@Localizer["Språk och verktyg jag använder dagligen i skolan och i egna projekt."]</p>
         </div>
 
         @{
@@ -139,19 +140,19 @@
         <div class="container">
             <div class="section-head flex-between reveal">
                 <div>
-                    <p class="eyebrow">Utvalt arbete</p>
-                    <h2 class="section-title" style="margin-bottom:0">Mina projekt</h2>
+                    <p class="eyebrow">@Localizer["Utvalt arbete"]</p>
+                    <h2 class="section-title" style="margin-bottom:0">@Localizer["Mina projekt"]</h2>
                 </div>
                 <a class="btn-ghost btn-sm" asp-controller="Projects" asp-action="Index">
-                    Alla projekt <span class="btn-arrow">&rarr;</span>
+                    @Localizer["Alla projekt"] <span class="btn-arrow">&rarr;</span>
                 </a>
             </div>
 
             <div class="slideshow reveal">
                 @if (Model.Projects.Count > 1)
                 {
-                    <button class="slide-nav slide-nav--prev" type="button" data-slide="-1" aria-label="Föregående projekt">&#8592;</button>
-                    <button class="slide-nav slide-nav--next" type="button" data-slide="1" aria-label="Nästa projekt">&#8594;</button>
+                    <button class="slide-nav slide-nav--prev" type="button" data-slide="-1" aria-label="@Localizer["Föregående projekt"]">&#8592;</button>
+                    <button class="slide-nav slide-nav--next" type="button" data-slide="1" aria-label="@Localizer["Nästa projekt"]">&#8594;</button>
                 }
 
                 <div class="slides-viewport">
@@ -165,7 +166,7 @@
                                     <a class="showcase" href="@project.ProjectUrl" target="_blank" rel="noopener">
                                         @if (!string.IsNullOrEmpty(project.ImageUrl))
                                         {
-                                            <img src="@project.ImageUrl" alt="@project.Title" loading="lazy" />
+                                            <img src="@project.ImageUrl" alt="@LocalizedText.Pick(project.Title, project.TitleEn)" loading="lazy" />
                                         }
                                         else
                                         {
@@ -182,9 +183,9 @@
                                                     }
                                                 </div>
                                             }
-                                            <h3>@project.Title</h3>
-                                            <p>@project.Description</p>
-                                            <span class="btn-solid btn-sm">Besök projekt <span class="btn-arrow">&rarr;</span></span>
+                                            <h3>@LocalizedText.Pick(project.Title, project.TitleEn)</h3>
+                                            <p>@LocalizedText.Pick(project.Description, project.DescriptionEn)</p>
+                                            <span class="btn-solid btn-sm">@Localizer["Besök projekt"] <span class="btn-arrow">&rarr;</span></span>
                                         </div>
                                     </a>
                                 }
@@ -193,7 +194,7 @@
                                     <div class="showcase">
                                         @if (!string.IsNullOrEmpty(project.ImageUrl))
                                         {
-                                            <img src="@project.ImageUrl" alt="@project.Title" loading="lazy" />
+                                            <img src="@project.ImageUrl" alt="@LocalizedText.Pick(project.Title, project.TitleEn)" loading="lazy" />
                                         }
                                         else
                                         {
@@ -210,8 +211,8 @@
                                                     }
                                                 </div>
                                             }
-                                            <h3>@project.Title</h3>
-                                            <p>@project.Description</p>
+                                            <h3>@LocalizedText.Pick(project.Title, project.TitleEn)</h3>
+                                            <p>@LocalizedText.Pick(project.Description, project.DescriptionEn)</p>
                                         </div>
                                     </div>
                                 }
@@ -227,7 +228,7 @@
                             @for (int i = 0; i < Model.Projects.Count; i++)
                             {
                                 <button class="dot @(i == 0 ? "is-active" : "")" type="button" data-index="@i"
-                                        aria-label="Gå till projekt @(i + 1)"></button>
+                                        aria-label="@Localizer["Gå till projekt {0}", i + 1]"></button>
                             }
                         </div>
                         <span class="slide-counter"><span id="currentSlide">1</span> / @Model.Projects.Count</span>
@@ -244,18 +245,18 @@
         <div class="grid-3">
             <a class="card card--hover reveal" asp-controller="Projects" asp-action="Index">
                 <p class="card-label"><i class="bi bi-code-slash"></i> 01</p>
-                <h3 class="card-title">Alla projekt</h3>
-                <p class="card-text">Skolprojekt och egna bygg, samlade på ett ställe.</p>
+                <h3 class="card-title">@Localizer["Alla projekt"]</h3>
+                <p class="card-text">@Localizer["Skolprojekt och egna bygg, samlade på ett ställe."]</p>
             </a>
             <a class="card card--hover reveal" asp-controller="Cv" asp-action="Index">
                 <p class="card-label"><i class="bi bi-file-earmark-text"></i> 02</p>
                 <h3 class="card-title">CV</h3>
-                <p class="card-text">Erfarenhet, utbildning och certifikat — även som PDF.</p>
+                <p class="card-text">@Localizer["Erfarenhet, utbildning och certifikat — även som PDF."]</p>
             </a>
             <a class="card card--hover reveal" asp-controller="Contact" asp-action="Index">
                 <p class="card-label"><i class="bi bi-envelope"></i> 03</p>
-                <h3 class="card-title">Kontakt</h3>
-                <p class="card-text">Skicka ett meddelande så hör jag av mig.</p>
+                <h3 class="card-title">@Localizer["Kontakt"]</h3>
+                <p class="card-text">@Localizer["Skicka ett meddelande så hör jag av mig."]</p>
             </a>
         </div>
     </div>

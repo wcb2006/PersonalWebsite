@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Om mig" xml:space="preserve">
+    <value>About me</value>
+  </data>
+  <data name="Öppen för nya uppdrag" xml:space="preserve">
+    <value>Open to new opportunities</value>
+  </data>
+  <data name="Se mina projekt" xml:space="preserve">
+    <value>See my projects</value>
+  </data>
+  <data name="Porträtt av William Borg" xml:space="preserve">
+    <value>Portrait of William Borg</value>
+  </data>
+  <data name="Projekt" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Senaste bygget" xml:space="preserve">
+    <value>Latest build</value>
+  </data>
+  <data name="Baserad i" xml:space="preserve">
+    <value>Based in</value>
+  </data>
+  <data name="Främst i" xml:space="preserve">
+    <value>Mainly in</value>
+  </data>
+  <data name="Bakom koden" xml:space="preserve">
+    <value>Behind the code</value>
+  </data>
+  <data name="Verktygslåda" xml:space="preserve">
+    <value>Toolbox</value>
+  </data>
+  <data name="Teknik jag jobbar i" xml:space="preserve">
+    <value>Tech I work with</value>
+  </data>
+  <data name="Språk och verktyg jag använder dagligen i skolan och i egna projekt." xml:space="preserve">
+    <value>Languages and tools I use daily at school and in my own projects.</value>
+  </data>
+  <data name="Utvalt arbete" xml:space="preserve">
+    <value>Selected work</value>
+  </data>
+  <data name="Mina projekt" xml:space="preserve">
+    <value>My projects</value>
+  </data>
+  <data name="Alla projekt" xml:space="preserve">
+    <value>All projects</value>
+  </data>
+  <data name="Föregående projekt" xml:space="preserve">
+    <value>Previous project</value>
+  </data>
+  <data name="Nästa projekt" xml:space="preserve">
+    <value>Next project</value>
+  </data>
+  <data name="Besök projekt" xml:space="preserve">
+    <value>Visit project</value>
+  </data>
+  <data name="Gå till projekt {0}" xml:space="preserve">
+    <value>Go to project {0}</value>
+  </data>
+  <data name="Skolprojekt och egna bygg, samlade på ett ställe." xml:space="preserve">
+    <value>School projects and personal builds, gathered in one place.</value>
+  </data>
+  <data name="Erfarenhet, utbildning och certifikat — även som PDF." xml:space="preserve">
+    <value>Experience, education and certificates — also as a PDF.</value>
+  </data>
+  <data name="Kontakt" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Skicka ett meddelande så hör jag av mig." xml:space="preserve">
+    <value>Send a message and I'll get back to you.</value>
+  </data>
+</root>

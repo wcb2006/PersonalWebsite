@@ -8,15 +8,15 @@
     <div class="container">
         <div class="section-head flex-between reveal">
             <div>
-                <p class="eyebrow">Meritförteckning</p>
+                <p class="eyebrow">@Localizer["Meritförteckning"]</p>
                 <h2 class="section-title" style="margin-bottom:0">CV — William Borg</h2>
             </div>
             <div class="footer-links">
                 <a class="btn-ghost btn-sm" href="/cv-william-borg.pdf" target="_blank" rel="noopener">
-                    <i class="bi bi-file-earmark-pdf"></i> Visa PDF
+                    <i class="bi bi-file-earmark-pdf"></i> @Localizer["Visa PDF"]
                 </a>
                 <a class="btn-solid btn-sm" href="/cv-william-borg.pdf" download="CV William Borg.pdf">
-                    <i class="bi bi-download"></i> Ladda ner
+                    <i class="bi bi-download"></i> @Localizer["Ladda ner"]
                 </a>
             </div>
         </div>
@@ -26,20 +26,20 @@
             <div>
                 @if (Model.Experiences.Any())
                 {
-                    <p class="card-label reveal">Arbetslivserfarenhet</p>
+                    <p class="card-label reveal">@Localizer["Arbetslivserfarenhet"]</p>
                     <div class="timeline reveal" style="margin-bottom:56px">
                         @foreach (var exp in Model.Experiences)
                         {
                             <div class="timeline-item">
                                 <p class="timeline-meta">
                                     @exp.StartDate.ToString("MMM yyyy") &ndash;
-                                    @(exp.EndDate.HasValue ? exp.EndDate.Value.ToString("MMM yyyy") : "Nu")
+                                    @(exp.EndDate.HasValue ? exp.EndDate.Value.ToString("MMM yyyy") : Localizer["Nu"].Value)
                                 </p>
-                                <h3 class="timeline-role">@exp.Role</h3>
+                                <h3 class="timeline-role">@LocalizedText.Pick(exp.Role, exp.RoleEn)</h3>
                                 <p class="timeline-org">@exp.Company</p>
                                 @if (!string.IsNullOrEmpty(exp.Description))
                                 {
-                                    <p class="timeline-desc">@exp.Description</p>
+                                    <p class="timeline-desc">@LocalizedText.Pick(exp.Description, exp.DescriptionEn)</p>
                                 }
                             </div>
                         }
@@ -48,19 +48,19 @@
 
                 @if (Model.Educations.Any())
                 {
-                    <p class="card-label reveal">Utbildning</p>
+                    <p class="card-label reveal">@Localizer["Utbildning"]</p>
                     <div class="timeline reveal">
                         @foreach (var edu in Model.Educations)
                         {
                             <div class="timeline-item">
                                 <p class="timeline-meta">
-                                    @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : "Nu")
+                                    @edu.StartYear &ndash; @(edu.EndYear.HasValue ? edu.EndYear.Value.ToString() : Localizer["Nu"].Value)
                                 </p>
-                                <h3 class="timeline-role">@edu.Degree</h3>
+                                <h3 class="timeline-role">@LocalizedText.Pick(edu.Degree, edu.DegreeEn)</h3>
                                 <p class="timeline-org">@edu.School</p>
                                 @if (!string.IsNullOrEmpty(edu.Description))
                                 {
-                                    <p class="timeline-desc">@edu.Description</p>
+                                    <p class="timeline-desc">@LocalizedText.Pick(edu.Description, edu.DescriptionEn)</p>
                                 }
                             </div>
                         }
@@ -71,12 +71,12 @@
             <!-- Sidospalt -->
             <aside class="stack">
                 <div class="card reveal">
-                    <p class="card-label">Färdigheter</p>
+                    <p class="card-label">@Localizer["Färdigheter"]</p>
                     <ul class="bullet-list">
                         @foreach (var skill in new[] { "Teamarbete", "Utbildning av kollegor", "Kassahantering",
                                                        "Kommunikation", "Datahantering", "Kundservice" })
                         {
-                            <li>@skill</li>
+                            <li>@Localizer[skill]</li>
                         }
                     </ul>
                 </div>
@@ -84,11 +84,11 @@
                 @if (Model.ItExperience.Any())
                 {
                     <div class="card reveal">
-                        <p class="card-label">IT-färdigheter</p>
+                        <p class="card-label">@Localizer["IT-färdigheter"]</p>
                         <div class="tag-row">
                             @foreach (var it in Model.ItExperience)
                             {
-                                <span class="tag">@it.Name</span>
+                                <span class="tag">@LocalizedText.Pick(it.Name, it.NameEn)</span>
                             }
                         </div>
                     </div>
@@ -97,29 +97,29 @@
                 <a class="card card--hover reveal" style="display:block"
                    href="https://www.credly.com/badges/f300179c-6abc-4094-ac81-fde7b32277e8"
                    target="_blank" rel="noopener">
-                    <p class="card-label">Certifikat</p>
-                    <img src="~/images/python-cert.jpg" alt="Python-certifikat från Certiport"
+                    <p class="card-label">@Localizer["Certifikat"]</p>
+                    <img src="~/images/python-cert.jpg" alt="@Localizer["Python-certifikat från Certiport"]"
                          style="width:100%;border-radius:10px;border:1px solid var(--border);margin-bottom:16px" />
                     <h3 class="card-title">Python — Certiport</h3>
                     <p class="card-text">Pearson VUE Business</p>
-                    <p class="card-text dim" style="margin-top:10px">Visa certifikat <span class="btn-arrow">&rarr;</span></p>
+                    <p class="card-text dim" style="margin-top:10px">@Localizer["Visa certifikat"] <span class="btn-arrow">&rarr;</span></p>
                 </a>
 
                 <div class="card reveal">
-                    <p class="card-label">Språk</p>
+                    <p class="card-label">@Localizer["Språk"]</p>
                     <ul class="info-list">
-                        <li><span class="info-key">Svenska</span><span class="info-val">Modersmål</span></li>
-                        <li><span class="info-key">Engelska</span><span class="info-val">Avancerad</span></li>
+                        <li><span class="info-key">@Localizer["Svenska"]</span><span class="info-val">@Localizer["Modersmål"]</span></li>
+                        <li><span class="info-key">@Localizer["Engelska"]</span><span class="info-val">@Localizer["Avancerad"]</span></li>
                     </ul>
                 </div>
 
                 <div class="card reveal">
-                    <p class="card-label">Kontakt</p>
+                    <p class="card-label">@Localizer["Kontakt"]</p>
                     <ul class="info-list">
-                        <li><span class="info-key">Telefon</span><span class="info-val">070-582 82 22</span></li>
-                        <li><span class="info-key">E-post</span><span class="info-val">wille.borg.c@@gmail.com</span></li>
-                        <li><span class="info-key">Ort</span><span class="info-val">Malmö</span></li>
-                        <li><span class="info-key">Körkort</span><span class="info-val">B</span></li>
+                        <li><span class="info-key">@Localizer["Telefon"]</span><span class="info-val">070-582 82 22</span></li>
+                        <li><span class="info-key">@Localizer["E-post"]</span><span class="info-val">wille.borg.c@@gmail.com</span></li>
+                        <li><span class="info-key">@Localizer["Ort"]</span><span class="info-val">Malmö</span></li>
+                        <li><span class="info-key">@Localizer["Körkort"]</span><span class="info-val">B</span></li>
                     </ul>
                 </div>
             </aside>

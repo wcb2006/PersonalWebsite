@@ -269,6 +269,21 @@ img {
     background: var(--surface-hover);
 }
 
+/* Språkväljare - avskild från menylänkarna med en tunn linje */
+.nav-lang {
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: 1px solid var(--border);
+}
+
+.nav-lang a {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 7px 11px;
+    border: 1px solid var(--border);
+}
+
 /* Dropdown */
 .nav-drop {
     position: relative;
@@ -415,6 +430,17 @@ img {
         padding: 12px 14px;
         border-radius: 11px;
         font-size: .95rem;
+    }
+
+    .nav-lang {
+        margin: 8px 0 0;
+        padding: 10px 0 0;
+        border-left: 0;
+        border-top: 1px solid var(--border);
+    }
+
+    .nav-lang a {
+        text-align: center;
     }
 
     .nav-drop-menu {
@@ -1373,6 +1399,17 @@ textarea {
 .footer-bottom p {
     margin: 0;
     color: var(--fg-dim);
+}
+
+.footer-bottom a {
+    color: var(--fg-dim);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer-bottom a:hover {
+    color: var(--fg);
+    opacity: 1;
 }
 
 /* --------------------------------------------------------------------------

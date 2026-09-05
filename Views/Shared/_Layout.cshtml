@@ -1,10 +1,18 @@
+@using System.Globalization
+@{
+    // Aktiv kultur sätts av UseRequestLocalization i Program.cs.
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var otherLang = lang == "sv" ? "en" : "sv";
+    // Håller kvar besökaren på samma sida vid språkbyte.
+    var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+}
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="@lang">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#08080a" />
-    <meta name="description" content="William Borg – utvecklare från Malmö. Projekt, CV och kontakt." />
+    <meta name="description" content="@Localizer["William Borg – utvecklare från Malmö. Projekt, CV och kontakt."]" />
     <title>@ViewData["Title"] · William Borg</title>
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -17,29 +25,35 @@
 </head>
 <body>
     <header class="site-header">
-        <nav class="container site-nav" aria-label="Huvudmeny">
+        <nav class="container site-nav" aria-label="@Localizer["Huvudmeny"]">
             <a class="brand" asp-controller="Home" asp-action="Index">
                 <span class="brand-mark">WB</span>
                 <span>William Borg</span>
             </a>
 
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Meny">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="@Localizer["Meny"]">
                 <span></span>
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li><a asp-controller="Home" asp-action="Index">Om mig</a></li>
+                <li><a asp-controller="Home" asp-action="Index">@Localizer["Om mig"]</a></li>
                 <li class="nav-drop">
-                    <a asp-controller="Projects" asp-action="Index">Projekt</a>
+                    <a asp-controller="Projects" asp-action="Index">@Localizer["Projekt"]</a>
                     <ul class="nav-drop-menu">
-                        <li><a asp-controller="Projects" asp-action="Index">Alla projekt</a></li>
-                        <li><a asp-controller="Projects" asp-action="Index" asp-route-category="school">Skolprojekt</a></li>
-                        <li><a asp-controller="Projects" asp-action="Index" asp-route-category="personal">Mina projekt</a></li>
+                        <li><a asp-controller="Projects" asp-action="Index">@Localizer["Alla projekt"]</a></li>
+                        <li><a asp-controller="Projects" asp-action="Index" asp-route-category="school">@Localizer["Skolprojekt"]</a></li>
+                        <li><a asp-controller="Projects" asp-action="Index" asp-route-category="personal">@Localizer["Mina projekt"]</a></li>
                     </ul>
                 </li>
-                <li><a asp-controller="Education" asp-action="Index">Utbildning</a></li>
+                <li><a asp-controller="Education" asp-action="Index">@Localizer["Utbildning"]</a></li>
                 <li><a asp-controller="Cv" asp-action="Index">CV</a></li>
-                <li><a asp-controller="Contact" asp-action="Index">Kontakt</a></li>
+                <li><a asp-controller="Contact" asp-action="Index">@Localizer["Kontakt"]</a></li>
+                <li class="nav-lang">
+                    <a asp-controller="Culture" asp-action="Set"
+                       asp-route-culture="@otherLang" asp-route-returnUrl="@returnUrl"
+                       rel="nofollow" hreflang="@otherLang"
+                       aria-label="@Localizer["Byt språk"]">@otherLang.ToUpperInvariant()</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -52,20 +66,21 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <p class="footer-tagline">Har du ett ärende?</p>
-                    <p class="footer-sub">Hör gärna av dig — jag svarar oftast inom ett dygn.</p>
+                    <p class="footer-tagline">@Localizer["Har du ett ärende?"]</p>
+                    <p class="footer-sub">@Localizer["Hör gärna av dig — jag svarar oftast inom ett dygn."]</p>
                 </div>
                 <div class="footer-links">
                     <a class="btn-solid btn-sm" asp-controller="Contact" asp-action="Index">
-                        Kontakta mig <span class="btn-arrow">&rarr;</span>
+                        @Localizer["Kontakta mig"] <span class="btn-arrow">&rarr;</span>
                     </a>
-                    <a class="btn-ghost btn-sm" asp-controller="Cv" asp-action="Index">Se CV</a>
+                    <a class="btn-ghost btn-sm" asp-controller="Cv" asp-action="Index">@Localizer["Se CV"]</a>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p>&copy; @DateTime.Now.Year William Borg</p>
-                <p>Byggd med ASP.NET Core &amp; PostgreSQL</p>
+                <p><a asp-controller="Home" asp-action="Privacy">@Localizer["Integritetspolicy"]</a></p>
+                <p>@Localizer["Byggd med ASP.NET Core och PostgreSQL"]</p>
             </div>
         </div>
     </footer>
